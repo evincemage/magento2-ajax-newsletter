@@ -22,7 +22,7 @@ It provides Ability to enable/disable extension from the backend. The customer c
 Ajax Newsletter extension for Magento 2 compatible with: 2.1, 2.2 and later version of 2.2 (Community)
 
 ## Installation
-For installation of Magento 2 extension, please this guide.
+For installation of Magento 2 extension, please follow this guide.
 https://evincemage.com/magento2-extension-installation-guilde.pdf
 
 ## Troubleshooting
@@ -41,7 +41,7 @@ Frontend
 	At the bottom of the page, you will find the Subscribe box.
 
 ## Support
-If you find any issues with plugin or or need the installation support, please contact support@evincemage.com
+If you find any issues with plugin or need the installation support, please contact support@evincemage.com
 
 ## Copyright and License
 COPYRIGHT © 2012-2018. ALL RIGHTS RESERVED - EVINCE DEVELOPMENT
