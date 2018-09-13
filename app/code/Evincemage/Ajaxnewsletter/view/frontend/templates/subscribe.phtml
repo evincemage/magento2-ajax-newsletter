@@ -1,0 +1,57 @@
+<?php  echo $this->getLayout()->createBlock('Magento\Newsletter\Block\Subscribe')->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml(); ?>
+<script>
+   require.config({
+    deps: [
+        'jquery'
+    ],
+    callback: function ($) {
+        var enable = '<?php echo $block->getEnable(); ?>';
+        if(enable > 0){
+        var form = $('form.subscribe');
+        form.submit(function(e) {
+            if(form.validation('isValid')){
+                var email = $("#newsletter").val();
+                var url = form.attr('action');
+                var loadingMessage = $('#loading-message');
+                if(loadingMessage.length == 0) {
+                    form.find('.control').append('<div generated="true" id="loading-message" style="display:none;padding-top:10px; color:#006400;">&nbsp;</div>');
+                    var loadingMessage = $('#loading-message');
+                }
+               e.preventDefault();
+                try{
+                    loadingMessage.html('Submitting...').show();
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'POST',
+                        showLoader: true,
+                        data: {email: email},
+                        success: function (data){
+                            if(data.status == "OK"){
+                                $('#newsletter').val('');
+                                loadingMessage.removeClass('mage-error');
+                                loadingMessage.addClass('success');
+                                loadingMessage.css('color','#006400');
+                            } else {
+                                loadingMessage.removeClass('success');
+                                loadingMessage.addClass('mage-error');
+                                loadingMessage.css('color','#e02b27');
+                            }
+                            loadingMessage.html(data.msg);
+                        },
+                        complete: function(){
+                            setTimeout(function(){
+                                loadingMessage.hide();
+                            },5000);
+                        }
+                    });
+                } catch (e){
+                    loadingMessage.html(e.message);
+                }
+            }
+            return false;
+        });
+    }
+   }
+})
+</script>
